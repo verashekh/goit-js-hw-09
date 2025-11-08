@@ -1,0 +1,2 @@
+import"./assets/styles-h6CMi4zT.js";const t={email:"",message:""},a=document.querySelector(".feedback-form");a.addEventListener("input",e=>{e.target.name&&(t[e.target.name]=e.target.value.trim(),localStorage.setItem("feedback-form-state",JSON.stringify(t)))});a.addEventListener("submit",e=>{if(e.preventDefault(),!t.email||!t.message){alert("Fill please all fields");return}console.log(t),localStorage.removeItem("feedback-form-state"),a.reset()});
+//# sourceMappingURL=2-form.js.map
