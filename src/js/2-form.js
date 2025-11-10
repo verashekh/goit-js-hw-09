@@ -1,13 +1,22 @@
 import '../css/styles.css';
 
+const STORAGE_KEY = 'feedback-form-state';
 const formData = { email: '', message: '' };
-
 const form = document.querySelector('.feedback-form');
+
+const savedData = localStorage.getItem(STORAGE_KEY);
+if (savedData) {
+  const parsedData = JSON.parse(savedData);
+  formData.email = parsedData.email || '';
+  formData.message = parsedData.message || '';
+  form.elements.email.value = formData.email;
+  form.elements.message.value = formData.message;
+}
 
 form.addEventListener('input', event => {
   if (event.target.name) {
     formData[event.target.name] = event.target.value.trim();
-    localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
   }
 });
 form.addEventListener('submit', event => {
@@ -17,6 +26,9 @@ form.addEventListener('submit', event => {
     return;
   }
   console.log(formData);
-  localStorage.removeItem('feedback-form-state');
+  localStorage.removeItem(STORAGE_KEY);
   form.reset();
+
+  formData.email = '';
+  formData.message = '';
 });
